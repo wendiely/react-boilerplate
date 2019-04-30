@@ -1,4 +1,4 @@
-# React-Boilerplate
+# boilerplate
 
 ## 支持
 <!-- - [x] react-router v4
@@ -15,4 +15,4 @@
 
 ## 运行
 - npm install
-- npm run local.dev# react-boilerplate
+- npm run local.dev# boilerplate

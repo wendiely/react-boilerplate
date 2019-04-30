@@ -67,7 +67,7 @@ module.exports = {
     // 打包前先清空
     new CleanWebpackPlugin('dist'),
     new HtmlWebpackPlugin({
-      title: 'react-boilerplate',
+      title: 'boilerplate',
       chunksSortMode: 'dependency',
       template: path.resolve(__dirname, './entry/index.dev.ejs')
     }),

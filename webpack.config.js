@@ -1,65 +1,100 @@
-const webpack = require('webpack');
+const webpack = require("webpack");
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const version = String(require("./package.json").version);
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin");
+
+const publicPath = "/" + version + "/";
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "bundle.[hash].js",
-    path: __dirname + "/dist"
+    path: path.resolve(__dirname, "./dist/" + version),
+    publicPath: publicPath
   },
   resolve: {
     extensions: [".js"],
     alias: {
-      components: path.resolve(__dirname, './src/components')
+      components: path.resolve(__dirname, "./src/components")
     }
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.js?$/,
+        use: ["babel-loader"],
+        include: [path.resolve(__dirname, "src")]
+      },
+      {
+        test: /\.less$/,
+        use: ["style-loader", "css-loader", "less-loader", "postcss-loader"]
+      },
+      {
+        test: /\.css/,
+        use: ["style-loader", "css-loader", "postcss-loader"]
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/,
         use: [
           {
-            loader: "babel-loader",
+            loader: "url-loader",
             options: {
-              presets: ["env", "react", "stage-0"]
-            },
+              limit: 8192, // 小于8k的图片自动转成base64格式，并且不会存在实体图片
+              outputPath: "images/" // 图片打包后存放的目录
+            }
           }
         ]
       },
       {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader", "less-loader"]
-        })
+        test: /\.(htm|html)$/,
+        use: "html-withimg-loader"
+      },
+      {
+        test: /\.(eot|ttf|woff|svg)$/,
+        use: "file-loader"
       }
     ]
   },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()]
+  },
   plugins: [
-    new webpack.NamedModulesPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(), // 3.0新功能 范围提升 （Scope Hoisting ）
+    // 打包前先清空
+    new CleanWebpackPlugin(["dist"], {
+      verbose: false
+    }),
     //根据模版生成HTML
     new HtmlWebpackPlugin({
-      title: 'react-boilerplate',
-      chunksSortMode: 'dependency',
-      template: path.resolve(__dirname, './src/index.ejs')
+      title: "react-boilerplate",
+      template: path.resolve(__dirname, "./entry/index.ejs"),
+      filename: path.resolve(__dirname, "./dist/index.html"),
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
+      chunksSortMode: "dependency"
+      // favicon: "./public/icon.ico"
     }),
-    //清除dist目录
-    new CleanWebpackPlugin(['dist'], {
-      verbose: true,
+
+    new webpack.optimize.ModuleConcatenationPlugin(),
+
+    //CSS单独打包
+    new ExtractTextPlugin({
+      filename: "[name].css",
+      allChunks: true,
+      ignoreOrder: true
     }),
-    //js压缩
-    new UglifyJsPlugin({
-      compress: {
-        warnings: false
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
       }
     }),
-    //CSS单独打包
-    new ExtractTextPlugin('./bundle.[hash].css'),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

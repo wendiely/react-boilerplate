@@ -1,4 +1,4 @@
-# boilerplate
+# react-boilerplate
 
 ## 目录说明
 - dist: 打包后的文件目录
@@ -8,4 +8,6 @@
 
 ## 运行
 - npm install
-- npm run local.dev# boilerplate
+- npm run local.dev
+
+# react-boilerplate

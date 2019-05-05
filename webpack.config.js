@@ -45,7 +45,7 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(), // 3.0新功能 范围提升 （Scope Hoisting ）
     //根据模版生成HTML
     new HtmlWebpackPlugin({
-      title: 'boilerplate',
+      title: 'react-boilerplate',
       chunksSortMode: 'dependency',
       template: path.resolve(__dirname, './src/index.ejs')
     }),

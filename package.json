@@ -1,18 +1,16 @@
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
+  "name": "react-boilerplate",
+  "version": "0.0.1",
   "description": "react boilerplate",
   "main": "index.js",
   "scripts": {
-    "local.dev": "webpack-dev-server --config webpack.config.dev.js --progress",
-    "local.dll": "webpack --config  webpack.dll.config.js --progress --display-modules --profile",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "test": "test",
-    "formatAll": "prettier --write 'src/**/*.js' ",
-    "precommit": "lint-staged"
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --progress",
+    "build": "NODE_ENV=production webpack -p",
+    "precommit": "lint-staged",
+    "formatAll": "prettier --write 'src/**/*.js' "
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "*.js": [
       "eslint $@",
       "prettier --write",
       "git add"
@@ -22,7 +20,7 @@
     "react",
     "start-kit"
   ],
-  "author": "zack",
+  "author": "ly",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.4.4",

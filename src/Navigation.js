@@ -29,7 +29,7 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 export default Navigation;

@@ -1,26 +1,26 @@
 import React from "react";
-import "./styles/index.less";
-import Index from "./router";
+import ErrorBoundary from "@/components/errorBoundary";
+import { Provider } from "react-redux";
+import { LocaleProvider } from "antd";
+import zh_CN from "antd/lib/locale-provider/zh_CN";
+import Router from "./router";
+import { store } from "@/store";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      current: this.getCurrentDateStr()
-    };
-  }
-
-  componentDidMount() {
-    this.setState({ current: this.getCurrentDateStr() });
-  }
-
-  getCurrentDateStr() {
-    return new Date().toLocaleString();
   }
 
   render() {
-    return <Index />;
+    return (
+      <ErrorBoundary>
+        <Provider store={store}>
+          <LocaleProvider locale={zh_CN}>
+            <Router />
+          </LocaleProvider>
+        </Provider>
+      </ErrorBoundary>
+    );
   }
 }
 

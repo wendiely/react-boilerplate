@@ -20,7 +20,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 export default Login;

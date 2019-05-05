@@ -13,7 +13,7 @@ module.exports = {
   resolve: {
     extensions: [".js"],
     alias: {
-      components: path.resolve(__dirname, "./src/components")
+      "@": path.resolve(__dirname, "./src")
     }
   },
   module: {

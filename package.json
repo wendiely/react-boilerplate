@@ -4,7 +4,7 @@
   "description": "react boilerplate",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --progress",
+    "local.dev": "NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --progress",
     "build": "NODE_ENV=production webpack -p",
     "precommit": "lint-staged",
     "formatAll": "prettier --write 'src/**/*.js' "
@@ -24,9 +24,15 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.4.4",
+    "antd": "^3.16.6",
+    "history": "^4.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^4.2.2"
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.1",
+    "redux-observable": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -38,6 +44,8 @@
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^8.0.5",
+    "babel-plugin-import": "^1.11.0",
+    "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
@@ -55,6 +63,7 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.5.3",
     "prop-types": "^15.7.2",
+    "remote-redux-devtools": "^0.5.16",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",

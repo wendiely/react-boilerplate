@@ -1,9 +1,10 @@
 import { combineEpics } from "redux-observable";
 import { combineReducers } from "redux";
-import { routerReducer as routing } from "react-router-redux";
+import { connectRouter } from "connected-react-router";
 
 export const rootEpic = combineEpics();
 
-export default combineReducers({
-  routing
-});
+export default history =>
+  combineReducers({
+    router: connectRouter(history)
+  });

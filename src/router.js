@@ -7,7 +7,9 @@ import {
   Link
 } from "react-router-dom";
 import UserList from "./pages/UserList";
+import ShopList from "./pages/shopList";
 import CustomerList from "./pages/CustomerList";
+import CustomerDetail from "./pages/CustomerDetail";
 import Navigation from "./Navigation";
 import Login from "./pages/Login";
 import PropTypes from "prop-types";
@@ -15,7 +17,8 @@ import PropTypes from "prop-types";
 const NoMatch = props => {
   return (
     <div>
-      {" "}page not found, click me back to <Link to="/">home page</Link>
+      {" "}
+      page not found, click me back to <Link to="/">home page</Link>
     </div>
   );
 };
@@ -105,10 +108,16 @@ class AppRouter extends React.Component {
           <Switch>
             <Route component={Login} path="/" exact />
             <Route component={Login} path="/login" exact />
+            <NavigationRoute path="/shopList" component={ShopList} exact />
             <NavigationRoute path="/userList" component={UserList} exact />
             <NavigationRoute
               path="/customerList"
               component={CustomerList}
+              exact
+            />
+            <NavigationRoute
+              path="/customerDetail"
+              component={CustomerDetail}
               exact
             />
             <Route component={NoMatch} />

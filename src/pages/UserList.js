@@ -1,9 +1,15 @@
 import React from "react";
+const bb = {
+  a: {
+    color: "red",
+    fontSize: "30px"
+  }
+};
 
 const UserList = props => {
   return (
-    <div style={{ marginTop: 100 }}>
-      <h2>用户列表</h2>
+    <div style={{ marginTop: 50 }}>
+      <div style={bb.a}>用户列表</div>
     </div>
   );
 };

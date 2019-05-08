@@ -6,13 +6,13 @@ class Login extends React.Component {
     console.log("the login button clicked......");
     console.log("this:", this);
     localStorage.setItem("isLogin", "1");
-    this.props.history.push("/userList");
+    this.props.history.push("/userList"); // 跳转到  /userList路由界面
   };
 
   render() {
     return (
       <div>
-        <h2>the login page ......</h2>
+        <h2>the login login page ......</h2>
         <button onClick={this.handleLogin}>login</button>
       </div>
     );
@@ -20,7 +20,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 export default Login;

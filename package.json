@@ -1,18 +1,16 @@
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
+  "name": "react-boilerplate",
+  "version": "0.1.0",
   "description": "react boilerplate",
   "main": "index.js",
   "scripts": {
-    "local.dev": "webpack-dev-server --config webpack.config.dev.js --progress",
-    "local.dll": "webpack --config  webpack.dll.config.js --progress --display-modules --profile",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "test": "test",
-    "formatAll": "prettier --write 'src/**/*.js' ",
-    "precommit": "lint-staged"
+    "local.dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --progress",
+    "build": "cross-env NODE_ENV=production webpack -p",
+    "precommit": "lint-staged",
+    "formatAll": "prettier --write 'src/**/*.js' "
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "*.js": [
       "prettier --write",
       "git add"
     ]
@@ -21,15 +19,18 @@
     "react",
     "start-kit"
   ],
-  "author": "zack",
+  "author": "ly",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "antd": "^3.17.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^4.1.2"
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-observable": "^0.18.0",
+    "rxjs": "^5.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -43,24 +44,27 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-import": "^1.11.0",
+    "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
-    "cross-env": "^5.0.1",
-    "css-loader": "^0.28.4",
+    "cross-env": "^5.2.0",
+    "css-loader": "^2.1.1",
     "eslint": "^4.2.0",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-react": "^7.1.0",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-react": "^7.13.0",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
-    "husky": "^0.14.3",
-    "less": "^2.7.2",
+    "husky": "^2.2.0",
+    "less": "^3.9.0",
     "less-loader": "^4.0.5",
     "lint-staged": "^4.0.2",
     "mockjs": "^1.0.1-beta3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.5.3",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.7.2",
     "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"

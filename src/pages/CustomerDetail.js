@@ -42,7 +42,7 @@ class CustomerDetail extends React.Component {
     }
   }
 
-  //   表单提交
+//   表单提交
   handleSubmit = e => {
     // e.preventDefault();
     console.log("点击之后", this.state.detail);
@@ -56,16 +56,17 @@ class CustomerDetail extends React.Component {
   validFunction = (rule, value, callback) => {
     console.log(7890, value);
     if (!value) {
-      callback("请输入手机号valid"); // 框内数据为空时报错
+        callback('请输入手机号valid'); // 框内数据为空时报错
     }
-    const RGE = /^1[385][1-9]\d{8}/;
-    if (!RGE.test(value)) {
-      callback("请输入正确的手机号"); // 正则校验未通过
+    const RGE = /^1[385][1-9]\d{8}/
+    if(!RGE.test(value)) {
+        callback("请输入正确的手机号"); // 正则校验未通过
     }
     callback(); // 校验通过
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { getFieldDecorator } = this.props.form;
     const { autoCompleteResult } = this.state;
     // 按钮
@@ -119,45 +120,45 @@ class CustomerDetail extends React.Component {
         {idDom}
 
         <Form.Item label="姓名" {...FormItemLayoutDetail}>
-          {getFieldDecorator("name", {
-            rules: [
-              {
-                required: true,
-                message: "请输入姓名"
-              }
-            ]
-          })(<Input placeholder="请输入姓名" />)}
+            {getFieldDecorator("name", {
+                rules: [
+                    {
+                        required: true,
+                        message: "请输入姓名"
+                    }
+            ],
+            })(<Input placeholder="请输入姓名" />)}
         </Form.Item>
         <Form.Item label="手机号" {...FormItemLayoutDetail}>
-          {getFieldDecorator("phone", {
-            rules: [
-              {
-                required: true,
-                message: "请输入手机号"
-              },
-              //   {
-              //     message:'请输入正确的手机号',
-              //     pattern: /^1[385][1-9]\d{8}/ // 正则验证
-              //   },
-              {
-                validator: this.validFunction // 自定义验证
-              }
-            ]
-          })(<Input placeholder="请输入电话号吗" />)}
+            {getFieldDecorator("phone", {
+                rules: [
+                {
+                    required: true,
+                    message: "请输入手机号"
+                },
+                //   {
+                //     message:'请输入正确的手机号',
+                //     pattern: /^1[385][1-9]\d{8}/ // 正则验证
+                //   },
+                {
+                    validator: this.validFunction // 自定义验证
+                }
+                ]
+            })(<Input placeholder="请输入电话号吗" />)}
         </Form.Item>
         <Form.Item label="邮箱" {...FormItemLayoutDetail}>
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                type: "email",
-                message: "请输入正确的邮箱!"
-              },
-              {
-                required: true,
-                message: "请输入邮箱!"
-              }
-            ]
-          })(<Input placeholder="请添加邮箱" />)}
+            {getFieldDecorator("email", {
+                rules: [
+                {
+                    type: "email",
+                    message: "请输入正确的邮箱!"
+                },
+                {
+                    required: true,
+                    message: "请输入邮箱!"
+                }
+                ]
+            })(<Input placeholder="请添加邮箱" />)}
         </Form.Item>
 
         <Form.Item label="年龄" {...FormItemLayoutDetail}>

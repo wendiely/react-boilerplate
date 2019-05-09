@@ -27,14 +27,14 @@ axios.interceptors.response.use(
   }
 );
 
-const baseAxios = (
+const baseAxios = ({
   url,
   data = {},
   type = "POST",
-  timeout,
+  timeout = 15000,
   API_ROOT,
   isFormData = false
-) => {
+}) => {
   const headers = {
     "Content-Type": "application/json"
   };

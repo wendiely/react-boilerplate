@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DemoApi from "@/api";
 
 class Login extends React.Component {
+  componentDidMount() {
+    DemoApi.getTestInfo().then(res => {
+      console.log(res, "getTestInfo");
+    });
+  }
+
   handleLogin = () => {
     console.log("the login button clicked......");
     console.log("this:", this);

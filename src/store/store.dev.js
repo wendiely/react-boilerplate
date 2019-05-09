@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 // import { createEpicMiddleware } from "redux-observable";
 import { createBrowserHistory } from "history";
-import { routerMiddleware } from "connected-react-router";
+// import { routerMiddleware } from "connected-react-router";
 import rootReducer, { rootEpic } from "@/ducks";
 
 export const history = createBrowserHistory();
@@ -24,10 +24,9 @@ function configureStore() {
       rootReducer(history),
       preloadedState,
       composeEnhancers(
-        applyMiddleware(
-          // epicMiddleware,
-          routerMiddleware(history)
-        )
+        applyMiddleware()
+        // epicMiddleware,
+        // routerMiddleware(history)
       )
     );
     return store;
@@ -35,10 +34,9 @@ function configureStore() {
     store = createStore(
       rootReducer(history),
       composeEnhancers(
-        applyMiddleware(
-          // epicMiddleware,
-          routerMiddleware(history)
-        )
+        applyMiddleware()
+        // epicMiddleware,
+        // routerMiddleware(history)
       )
     );
     return store;

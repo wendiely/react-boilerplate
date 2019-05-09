@@ -65,6 +65,8 @@ const list = function(options) {
 
 Mock.mock("/customerList", "get", list); // 获取列表
 Mock.mock("/customerList", "post", list); // 删除一条数据
+Mock.mock("/customerList", "put", list); // 删除一条数据
+Mock.mock("/customerListAdd", "post", list); // 删除一条数据
 
 // Mock.mock('/customerList', {
 //     "mocktest|10-15": [{

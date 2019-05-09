@@ -32,9 +32,8 @@ const baseAxios = (
   data = {},
   type = "POST",
   timeout,
-  API_ROOT = "",
-  isFormData = false,
-  hasAPI_ROOT = false
+  API_ROOT,
+  isFormData = false
 ) => {
   const headers = {
     "Content-Type": "application/json"

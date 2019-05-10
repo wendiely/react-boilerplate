@@ -3,20 +3,57 @@ import PropTypes from "prop-types";
 import {
   Form,
   Input,
-  Tooltip,
-  Icon,
+  DatePicker,
+  InputNumber,
   Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete
+  // Select,
+  Button
+  // AutoComplete
 } from "antd";
 import axios from "axios";
+import moment from "moment"; // antd日期选择器的日期格式
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
+// const { Option } = Select;
+// const AutoCompleteOption = AutoComplete.Option;
+// 自定义级联选择器的选择范围（城市选择）
+const residences = [
+  {
+    value: "浙江",
+    label: "浙江",
+    children: [
+      {
+        value: "杭州",
+        label: "杭州"
+      }
+    ]
+  },
+  {
+    value: "江苏",
+    label: "江苏",
+    children: [
+      {
+        value: "南京",
+        label: "南京",
+        children: [
+          {
+            value: "秦淮",
+            label: "秦淮"
+          }
+        ]
+      },
+      {
+        value: "无锡",
+        label: "无锡",
+        children: [
+          {
+            value: "锡山",
+            label: "锡山"
+          }
+        ]
+      }
+    ]
+  }
+];
 
 class CustomerDetail extends React.Component {
   constructor(props) {
@@ -40,6 +77,7 @@ class CustomerDetail extends React.Component {
     } else {
       console.log("2222222详情页加载吗？", this.props);
       this.setState({ detail: this.props.location.state.detail });
+      console.log(this.state.detail, this.props.location.state.detail);
     }
   }
 
@@ -50,24 +88,25 @@ class CustomerDetail extends React.Component {
     // eslint-disable-next-line react/prop-types
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        values.birthday = moment(values.birthday).format("YYYY-MM-DD"); // 修改时间选择器获得的时间的格式
+        console.log(
+          "Received values of form: ",
+          values,
+          moment(values.birthday).format("YYYY-MM-DD")
+        );
         if (this.props.location.state === undefined) {
-          axios.put("/customerList", values).then(res => {
-            console.log("mock返回数据put Put", res);
-            this.props.location.history(-1);
+          console.log("新增");
+          axios.post("/customerListAdd", values).then(res => {
+            console.log("mock返回数据put POST", res);
+            history.go(-1);
           });
-          // axios.put("/customerList", { id: item.id }).then(res => {
-          //   console.log("删除操作返回mock数据", res.data.data);
-          //   this.setState({ list: res.data.data });
-          // });
         } else {
-          // axios.get("/customerList").then(res => {
-          //   console.log("mock返回数据", res);
-          //   this.setState({ list: res.data.data });
-          // });
+          console.log("编辑");
+          values["id"] = this.state.detail.id;
           axios.put("/customerList", values).then(res => {
+            console.log("dfs", this.props);
             console.log("mock返回数据put Put", res);
-            this.props.location.history(-1);
+            history.go(-1);
           });
         }
       }
@@ -89,7 +128,7 @@ class CustomerDetail extends React.Component {
   render() {
     // eslint-disable-next-line react/prop-types
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
+    // const { autoCompleteResult } = this.state;
     // 按钮
     const tailFormItemLayout = {
       wrapperCol: {
@@ -131,9 +170,7 @@ class CustomerDetail extends React.Component {
     if (this.state.detail.id !== undefined) {
       idDom = (
         <Form.Item label="编号" {...FormItemLayoutDetail}>
-          {getFieldDecorator("id", {
-            initialValue: this.state.detail.id
-          })(<div />)}
+          {this.state.detail.id}
         </Form.Item>
       );
     }
@@ -187,16 +224,46 @@ class CustomerDetail extends React.Component {
           })(<Input placeholder="请添加邮箱" />)}
         </Form.Item>
 
-        <Form.Item label="年龄" {...FormItemLayoutDetail}>
-          <Input placeholder="Basic usage" value={this.state.detail.age} />
+        <Form.Item label="年收入/w" {...FormItemLayoutDetail}>
+          {getFieldDecorator("age", {
+            initialValue: this.state.detail.age,
+            rules: [
+              {
+                type: "number",
+                required: false,
+                message: "请填写年收入",
+                min: 0
+              }
+            ]
+          })(<InputNumber placeholder="年收入" />)}
         </Form.Item>
         <Form.Item label="生日" {...FormItemLayoutDetail}>
-          <Input placeholder="Basic usage" value={this.state.detail.birthday} />
+          {getFieldDecorator("birthday", {
+            rules: [
+              {
+                type: "object",
+                required: true,
+                message: "Please select time!"
+              }
+            ],
+            initialValue:
+              this.props.location.state !== undefined
+                ? moment(this.state.detail.birthday, "YYYY-MM-DD")
+                : null
+          })(<DatePicker />)}
         </Form.Item>
         <Form.Item label="居住城市" {...FormItemLayoutDetail}>
-          <Input placeholder="Basic usage" value={this.state.detail.city} />
+          {getFieldDecorator("city", {
+            setFieldsValue:
+              this.props.location.state !== undefined
+                ? this.props.location.state.detail.city
+                : ["浙江", "杭州"],
+            // initialValue: this.props.location.state !== undefined ? this.props.location.state.detail.city : ['浙江', '杭州'],
+            rules: [
+              { type: "array", required: true, message: "请填写居住城市" }
+            ]
+          })(<Cascader options={residences} placeholder="请选择城市" />)}
         </Form.Item>
-
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             提交

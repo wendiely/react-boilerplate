@@ -23,7 +23,11 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.4.4",
-    "antd": "^3.17.0",
+    "antd": "^3.16.6",
+    "axios": "^0.18.0",
+    "connected-react-router": "^6.4.0",
+    "history": "^4.9.0",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",

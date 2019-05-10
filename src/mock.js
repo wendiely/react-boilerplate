@@ -28,10 +28,11 @@ const arrOBject = Mock.mock({
     }
   ]
 });
+arrOBject.data.map(i => (i.city = i.city.split(" ")));
 let arr = arrOBject.data;
 console.log("mock里的", arrOBject, arr);
 
-// 实行删除操作
+// 实行展示，删除，修改操作
 const list = function(options) {
   console.log("fanhide ", options);
   const rtype = options.type.toLowerCase(); //获取请求的类型并转换为小写
@@ -39,6 +40,19 @@ const list = function(options) {
   switch (rtype) {
     case "get":
       console.log(rtype);
+      break;
+    // eslint-disable-next-line no-case-declarations
+    case "put":
+      console.log("修改", rtype);
+      const theChange = arr.filter(
+        val => val.id === JSON.parse(options.body).id
+      )[0];
+      theChange.name = JSON.parse(options.body).name;
+      theChange.phone = JSON.parse(options.body).phone;
+      theChange.email = JSON.parse(options.body).email;
+      theChange.birthday = JSON.parse(options.body).birthday;
+      theChange.city = JSON.parse(options.body).city;
+      theChange.age = JSON.parse(options.body).age;
       break;
     case "post":
       console.log(5678);
@@ -65,8 +79,55 @@ const list = function(options) {
 
 Mock.mock("/customerList", "get", list); // 获取列表
 Mock.mock("/customerList", "post", list); // 删除一条数据
-Mock.mock("/customerList", "put", list); // 删除一条数据
-Mock.mock("/customerListAdd", "post", list); // 删除一条数据
+Mock.mock("/customerList", "put", list); // 修改一条数据
+
+// 新增操作
+const listAdd = function(options) {
+  console.log("fanhide ", options);
+  const rtype = options.type.toLowerCase(); //获取请求的类型并转换为小写
+  switch (rtype) {
+    // eslint-disable-next-line no-case-declarations
+    case "post":
+      console.log(5678, "我是新增的接口");
+      const len = arr.length;
+      arr[len] = JSON.parse(options.body);
+      arr[len]["id"] = parseInt(arr[len - 1].id) + 1;
+      break;
+    default:
+      break;
+  }
+  console.log(arr);
+  return {
+    data: arr
+  };
+};
+Mock.mock("/customerListAdd", "post", listAdd); // 增加一条数据
+
+// 搜索操作
+const listSq = function(options) {
+  console.log("fanhide ", options);
+  const rtype = options.type.toLowerCase(); //获取请求的类型并转换为小写
+  switch (rtype) {
+    // eslint-disable-next-line no-case-declarations
+    case "post":
+      console.log(5678, "执行搜索操作", JSON.parse(options.body));
+      const condition = JSON.parse(options.body);
+      if (condition.name !== undefined) {
+        arr = arr.filter(i => i.name === condition.name);
+      }
+      if (condition.phone !== undefined) {
+        arr = arr.filter(i => i.phone === condition.phone);
+      }
+      break;
+    default:
+      break;
+  }
+  console.log(arr);
+  return {
+    data: arr
+  };
+};
+Mock.mock("/customerListSq", "post", listSq); // 增加一条数据
 
 // Mock.mock('/customerList', {
 //     "mocktest|10-15": [{

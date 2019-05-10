@@ -6,7 +6,7 @@ import { Provider, ReactReduxContext } from "react-redux";
 import { LocaleProvider } from "antd";
 import zh_CN from "antd/lib/locale-provider/zh_CN";
 import Router from "./router";
-import { store, history } from "@/store";
+import { store } from "@/store";
 
 class App extends React.Component {
   constructor(props) {

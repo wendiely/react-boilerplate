@@ -11,7 +11,6 @@
 //         <h1>我认为</h1>
 //       </div>
 //     );
-
 // };
 
 // export default CustomerList;
@@ -19,7 +18,8 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { Button } from "antd";
+import { Button, Table, Divider, Popconfirm, message } from "antd";
+import Form from "../components/Form";
 
 import "../mock";
 
@@ -29,7 +29,8 @@ class CustomerList extends React.Component {
     this.state = {
       list: []
     };
-    // this.delete = this.delete.bind(this)
+
+    this.search = this.search.bind(this);
   }
   // 组件挂载后调用一次
   componentDidMount() {
@@ -43,6 +44,7 @@ class CustomerList extends React.Component {
       });
     }
   }
+  // 删除一条信息
   delete(item) {
     console.log("东搜", item);
     const id = item.id;
@@ -51,11 +53,23 @@ class CustomerList extends React.Component {
       console.log("删除操作返回mock数据", res.data.data);
       this.setState({ list: res.data.data });
     });
-    // axios.get('/customerList').then(res => {
-    //     console.log('删除操作返回mock数据', res.data.data)
-    //     this.setState({ list: res.data.data });
-    //   })
+    message.success("删除客户" + item.name + "的信息");
   }
+  // 取消删除
+  cancel() {
+    message.error("取消删除");
+  }
+  // 搜索，共父子组件调用
+  search = item => {
+    console.log("搜索搜索搜索搜索", item);
+    // const id = item.id;
+    // console.log("/customerList?id=" + id);
+    axios.post("/customerListSq", item).then(res => {
+      console.log("删除操作返回mock数据", res.data.data);
+      this.setState({ list: res.data.data });
+    });
+  };
+
   render() {
     const styleCss = {
       td: {
@@ -68,14 +82,98 @@ class CustomerList extends React.Component {
       },
       buttonRight: {
         marginRight: "10px"
+      },
+      table: {
+        padding: "0 50px",
+        boxSizing: "border-box",
+        marginTop: 50
+      },
+      mar: {
+        marginLeft: "30px"
       }
     };
-
+    const columns = [
+      {
+        title: "序号",
+        dataIndex: "id",
+        key: "id"
+        // render: text => <a href="javascript:;">{text}</a>
+      },
+      {
+        title: "姓名",
+        dataIndex: "name",
+        key: "name"
+        // render: text => <a href="javascript:;">{text}</a>
+      },
+      {
+        title: "电话",
+        dataIndex: "phone",
+        key: "phone"
+      },
+      {
+        title: "邮箱",
+        dataIndex: "email",
+        key: "email"
+      },
+      {
+        title: "年龄",
+        dataIndex: "age",
+        key: "age"
+      },
+      {
+        title: "生日",
+        dataIndex: "birthday",
+        key: "birthday"
+      },
+      {
+        title: "居住城市",
+        dataIndex: "city",
+        key: "city"
+      },
+      {
+        title: "操作",
+        key: "action",
+        render: (text, record) => (
+          <span>
+            <Button
+              style={styleCss.buttonRight}
+              type="primary"
+              size="default"
+              onClick={() => {
+                this.props.history.push({
+                  pathname: "/CustomerDetail",
+                  state: { detail: record }
+                });
+              }}
+            >
+              编辑
+            </Button>
+            <Divider type="vertical" />
+            <Popconfirm
+              title="确认要删除吗?"
+              onConfirm={() => this.delete(record)}
+              onCancel={() => this.cancel(record)}
+              okText="是的"
+              cancelText="取消"
+            >
+              <Button type="primary" size="default">
+                删除
+              </Button>
+            </Popconfirm>
+          </span>
+        )
+      }
+    ];
+    const sql = {
+      name: "",
+      phone: ""
+    };
     return (
-      <div style={{ marginTop: 100 }}>
+      <div style={styleCss.table}>
         <h2>
           客户列表{" "}
           <Button
+            style={styleCss.mar}
             type="primary"
             size="default"
             onClick={() => {
@@ -85,66 +183,8 @@ class CustomerList extends React.Component {
             新建
           </Button>
         </h2>
-        <table style={styleCss.header}>
-          <tbody>
-            <tr style={{ color: "black" }}>
-              <td style={styleCss.td}>序号</td>
-              <td style={styleCss.td}>姓名</td>
-              <td style={styleCss.td}>电话</td>
-              <td style={styleCss.td}>邮箱</td>
-              <td style={styleCss.td}>年龄</td>
-              <td style={styleCss.td}>生日</td>
-              <td style={styleCss.td}>城市</td>
-              <td style={styleCss.td}>兄弟</td>
-              <td style={styleCss.td}>姐妹</td>
-              <td style={styleCss.td}>身材</td>
-              <td style={styleCss.td}>操作</td>
-            </tr>
-            {this.state.list.map((item, index) => {
-              return (
-                <tr key={index} style={{ color: item.color }}>
-                  <td style={styleCss.td}>{item.id}</td>
-                  <td style={styleCss.td}>{item.name}</td>
-                  <td style={styleCss.td}>{item.phone}</td>
-                  <td style={styleCss.td}>{item.email}</td>
-                  <td style={styleCss.td}>{item.age}</td>
-                  <td style={styleCss.td}>{item.birthday}</td>
-                  <td style={styleCss.td}>{item.city}</td>
-                  <td style={styleCss.td}>{item.brother}</td>
-                  <td style={styleCss.td}>{item.sister}</td>
-                  <td style={styleCss.td}>{item.isFat ? "胖" : "瘦"}</td>
-                  {/* <td><button onClick={() => {
-                    // localStorage.removeItem("isLogin");
-                    this.props.history.push({pathname: "/CustomerDetail", state: {detail: item}});
-                  }}
-                    >编辑</button></td> */}
-                  <td style={styleCss.td}>
-                    <Button
-                      style={styleCss.buttonRight}
-                      type="primary"
-                      size="default"
-                      onClick={() => {
-                        this.props.history.push({
-                          pathname: "/CustomerDetail",
-                          state: { detail: item }
-                        });
-                      }}
-                    >
-                      编辑
-                    </Button>
-                    <Button
-                      type="primary"
-                      size="default"
-                      onClick={() => this.delete(item)}
-                    >
-                      删除
-                    </Button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <Form comment={sql} search={this.search} />
+        <Table columns={columns} dataSource={this.state.list} />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import axios from "axios";
+// import Qs from 'qs'
 // const API_ROOT = "";
 
 /**
@@ -54,17 +55,20 @@ const baseAxios = ({
 
   if (type === "GET" || type === "DELETE") {
     options.params = data;
+    console.log("lO", options);
   } else {
     options.data = data;
   }
 
   return axios(options).then(res => {
-    let { headers, data, status } = res;
-    let contentType = headers["content-type"];
+    const { headers, data, status } = res;
+    console.log("sdfsdf", res);
+    const contentType = headers["content-type"];
     if (status !== 200) {
       return Promise.reject(new Error("服务器请求失败"));
     } else {
       if (contentType && contentType.indexOf("application/json") !== -1) {
+        console.log("dddddd", data);
         return Promise.resolve(data);
       } else {
         return Promise.reject(new Error("the response is not JSON"));

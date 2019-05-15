@@ -7,6 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import UserList from "./pages/UserList";
+import UserDetail from "./pages/UserDetail";
 import ShopList from "./pages/shopList";
 import CustomerList from "./pages/CustomerList";
 import CustomerDetail from "./pages/CustomerDetail";
@@ -120,6 +121,7 @@ class AppRouter extends React.Component {
               component={CustomerDetail}
               exact
             />
+            <NavigationRoute path="/userDetail" component={UserDetail} exact />
             <Route component={NoMatch} />
           </Switch>
         </div>

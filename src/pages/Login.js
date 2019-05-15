@@ -5,7 +5,7 @@ import DemoApi from "@/api";
 class Login extends React.Component {
   componentDidMount() {
     DemoApi.getTestInfo().then(res => {
-      console.log(res, "getTestInfo");
+      console.log(res + "哈哈哈哈哈哈哈哈哈", "getTestInfo");
     });
   }
 

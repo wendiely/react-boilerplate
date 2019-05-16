@@ -12,48 +12,10 @@ import {
 } from "antd";
 import axios from "axios";
 import moment from "moment"; // antd日期选择器的日期格式
+import UserDetailFrom from "../components/UserDetailForm";
 
 // const { Option } = Select;
 // const AutoCompleteOption = AutoComplete.Option;
-// 自定义级联选择器的选择范围（城市选择）
-const residences = [
-  {
-    value: "浙江",
-    label: "浙江",
-    children: [
-      {
-        value: "杭州",
-        label: "杭州"
-      }
-    ]
-  },
-  {
-    value: "江苏",
-    label: "江苏",
-    children: [
-      {
-        value: "南京",
-        label: "南京",
-        children: [
-          {
-            value: "秦淮",
-            label: "秦淮"
-          }
-        ]
-      },
-      {
-        value: "无锡",
-        label: "无锡",
-        children: [
-          {
-            value: "锡山",
-            label: "锡山"
-          }
-        ]
-      }
-    ]
-  }
-];
 
 class UserDetail extends React.Component {
   constructor(props) {
@@ -176,100 +138,102 @@ class UserDetail extends React.Component {
     }
 
     return (
-      <Form {...formItemLayout} onSubmit={() => this.handleSubmit()}>
-        {idDom}
+      // <Form {...formItemLayout} onSubmit={() => this.handleSubmit()}>
+      //   {idDom}
 
-        <Form.Item label="姓名" {...FormItemLayoutDetail}>
-          {getFieldDecorator("name", {
-            rules: [
-              {
-                required: true,
-                message: "请输入姓名"
-              }
-            ],
-            initialValue: this.state.detail.name
-          })(<Input placeholder="请输入姓名" />)}
-        </Form.Item>
-        <Form.Item label="手机号" {...FormItemLayoutDetail}>
-          {getFieldDecorator("phone", {
-            rules: [
-              {
-                required: true,
-                message: "请输入手机号"
-              },
-              //   {
-              //     message:'请输入正确的手机号',
-              //     pattern: /^1[385][1-9]\d{8}/ // 正则验证
-              //   },
-              {
-                validator: this.validFunction // 自定义验证
-              }
-            ],
-            initialValue: this.state.detail.phone
-          })(<Input placeholder="请输入电话号吗" />)}
-        </Form.Item>
-        <Form.Item label="邮箱" {...FormItemLayoutDetail}>
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                type: "email",
-                message: "请输入正确的邮箱!"
-              },
-              {
-                required: true,
-                message: "请输入邮箱!"
-              }
-            ],
-            initialValue: this.state.detail.email
-          })(<Input placeholder="请添加邮箱" />)}
-        </Form.Item>
+      //   <Form.Item label="姓名" {...FormItemLayoutDetail}>
+      //     {getFieldDecorator("name", {
+      //       rules: [
+      //         {
+      //           required: true,
+      //           message: "请输入姓名"
+      //         }
+      //       ],
+      //       initialValue: this.state.detail.name
+      //     })(<Input placeholder="请输入姓名" />)}
+      //   </Form.Item>
+      //   <Form.Item label="手机号" {...FormItemLayoutDetail}>
+      //     {getFieldDecorator("phone", {
+      //       rules: [
+      //         {
+      //           required: true,
+      //           message: "请输入手机号"
+      //         },
+      //         //   {
+      //         //     message:'请输入正确的手机号',
+      //         //     pattern: /^1[385][1-9]\d{8}/ // 正则验证
+      //         //   },
+      //         {
+      //           validator: this.validFunction // 自定义验证
+      //         }
+      //       ],
+      //       initialValue: this.state.detail.phone
+      //     })(<Input placeholder="请输入电话号吗" />)}
+      //   </Form.Item>
+      //   <Form.Item label="邮箱" {...FormItemLayoutDetail}>
+      //     {getFieldDecorator("email", {
+      //       rules: [
+      //         {
+      //           type: "email",
+      //           message: "请输入正确的邮箱!"
+      //         },
+      //         {
+      //           required: true,
+      //           message: "请输入邮箱!"
+      //         }
+      //       ],
+      //       initialValue: this.state.detail.email
+      //     })(<Input placeholder="请添加邮箱" />)}
+      //   </Form.Item>
 
-        <Form.Item label="年收入/w" {...FormItemLayoutDetail}>
-          {getFieldDecorator("age", {
-            initialValue: this.state.detail.age,
-            rules: [
-              {
-                type: "number",
-                required: false,
-                message: "请填写年收入",
-                min: 0
-              }
-            ]
-          })(<InputNumber placeholder="年收入" />)}
-        </Form.Item>
-        <Form.Item label="生日" {...FormItemLayoutDetail}>
-          {getFieldDecorator("birthday", {
-            rules: [
-              {
-                type: "object",
-                required: true,
-                message: "Please select time!"
-              }
-            ],
-            initialValue:
-              this.props.location.state !== undefined
-                ? moment(this.state.detail.birthday, "YYYY-MM-DD")
-                : null
-          })(<DatePicker />)}
-        </Form.Item>
-        <Form.Item label="居住城市" {...FormItemLayoutDetail}>
-          {getFieldDecorator("city", {
-            setFieldsValue:
-              this.props.location.state !== undefined
-                ? this.props.location.state.detail.city
-                : ["浙江", "杭州"],
-            // initialValue: this.props.location.state !== undefined ? this.props.location.state.detail.city : ['浙江', '杭州'],
-            rules: [
-              { type: "array", required: true, message: "请填写居住城市" }
-            ]
-          })(<Cascader options={residences} placeholder="请选择城市" />)}
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            提交
-          </Button>
-        </Form.Item>
-      </Form>
+      //   <Form.Item label="年收入/w" {...FormItemLayoutDetail}>
+      //     {getFieldDecorator("age", {
+      //       initialValue: this.state.detail.age,
+      //       rules: [
+      //         {
+      //           type: "number",
+      //           required: false,
+      //           message: "请填写年收入",
+      //           min: 0
+      //         }
+      //       ]
+      //     })(<InputNumber placeholder="年收入" />)}
+      //   </Form.Item>
+      //   <Form.Item label="生日" {...FormItemLayoutDetail}>
+      //     {getFieldDecorator("birthday", {
+      //       rules: [
+      //         {
+      //           type: "object",
+      //           required: true,
+      //           message: "Please select time!"
+      //         }
+      //       ],
+      //       initialValue:
+      //         this.props.location.state !== undefined
+      //           ? moment(this.state.detail.birthday, "YYYY-MM-DD")
+      //           : null
+      //     })(<DatePicker />)}
+      //   </Form.Item>
+      //   {/* <Form.Item label="居住城市" {...FormItemLayoutDetail}>
+      //     {getFieldDecorator("city", {
+      //       setFieldsValue:
+      //         this.props.location.state !== undefined
+      //           ? this.props.location.state.detail.city
+      //           : ["浙江", "杭州"],
+      //       // initialValue: this.props.location.state !== undefined ? this.props.location.state.detail.city : ['浙江', '杭州'],
+      //       rules: [
+      //         { type: "array", required: true, message: "请填写居住城市" }
+      //       ]
+      //     })()}
+      //   </Form.Item> */}
+      //   <Form.Item {...tailFormItemLayout}>
+      //     <Button type="primary" htmlType="submit">
+      //       提交
+      //     </Button>
+      //   </Form.Item>
+      // </Form>
+
+      <UserDetailFrom />
     );
   }
 }

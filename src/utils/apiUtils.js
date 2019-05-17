@@ -15,7 +15,7 @@ axios.interceptors.request.use(
 );
 
 /**
- * 响应拦截
+ * 响应拦截, 拦截响应数据，对响应数据做些什么
  */
 axios.interceptors.response.use(
   res => {
@@ -62,7 +62,6 @@ const baseAxios = ({
 
   return axios(options).then(res => {
     const { headers, data, status } = res;
-    console.log("sdfsdf", res);
     const contentType = headers["content-type"];
     if (status !== 200) {
       return Promise.reject(new Error("服务器请求失败"));

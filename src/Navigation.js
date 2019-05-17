@@ -7,7 +7,8 @@ class Navigation extends React.Component {
   constructor(props) {
     super(props);
     (this.state = {
-      list: []
+      list: [],
+      name: ""
       // eslint-disable-next-line react/prop-types
       // key: props.location.pathname
     }),
@@ -15,7 +16,11 @@ class Navigation extends React.Component {
     this.callback = this.callback.bind(this); // 改变this的指向
   }
   componentDidMount() {
-    console.log("开始导航navigation mounted......");
+    console.log(
+      "11开始导航navigation mounted......",
+      JSON.parse(localStorage.getItem("denglu"))[0].name
+    );
+    this.setState({ name: JSON.parse(localStorage.getItem("denglu"))[0].name });
   }
 
   // let TabPane = Tabs.TabPane;
@@ -37,12 +42,14 @@ class Navigation extends React.Component {
     return (
       <div>
         <Row>
-          <Col span={3} push={21}>
+          <Col span={6} push={20}>
+            <span style={{ margin: "0 10px 0 0" }}>{this.state.name}</span>
             <Button
               type="primary"
               size="default"
               onClick={() => {
                 localStorage.removeItem("isLogin");
+                localStorage.removeItem("denglu"); // 删除登录信息
                 this.props.history.push("/login");
               }}
             >

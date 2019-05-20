@@ -8,7 +8,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      userAgoList: []
     };
     console.log(this.props);
   }
@@ -22,18 +23,14 @@ class Login extends React.Component {
     console.log("the login button clicked......");
     console.log("this:", this);
     if (this.state.username === "" || this.state.password === "") {
-      message.info("请填写用户名密码"); // 全局提示
+      message.info("请填写用户名/密码"); // 全局提示
     } else {
       const detail = {
         name: this.state.username,
         password: this.state.password
       };
-      const userAgoList = [];
-      userAgoList.push(detail);
-      console.log(userAgoList, JSON.stringify(userAgoList));
-      localStorage.setItem("denglu", JSON.stringify(userAgoList));
-      // localStorage.setItem("username",this.state.username);
-      // localStorage.setItem("password",this.state.password);
+      this.state.userAgoList.push(detail);
+      localStorage.setItem("denglu", JSON.stringify(this.state.userAgoList));
 
       localStorage.setItem("isLogin", "1");
       this.props.history.push("/userList"); // 跳转到  /userList路由界面
@@ -86,7 +83,7 @@ class Login extends React.Component {
     return (
       <div style={styleCss.bgc}>
         <div style={styleCss.box}>
-          <h2 style={styleCss.dl}>登陆</h2>
+          <h2 style={styleCss.dl}>聚奢网后台管理系统</h2>
 
           <Form
             style={styleCss.boxBorder}

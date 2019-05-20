@@ -73,23 +73,24 @@ class ShopList extends React.Component {
     };
   }
   componentDidMount() {
+    console.log("hahhahhshopList", this.props);
     // eslint-disable-next-line react/prop-types
-    const pathname = this.props.location.pathname;
-    if (pathname === "/shopList") {
-      console.log(1111);
-      axios.get("/shopList").then(res => {
-        console.log("mock返回数据", res.data.mocktest);
-        this.setState({ list: res.data.mocktest });
-      });
-    }
+    // const pathname = this.props.location.pathname;
+    // if (pathname === "/shopList") {
+    console.log(1111);
+    axios.get("/shopList").then(res => {
+      console.log("mock返回数据", res.data.mocktest);
+      this.setState({ list: res.data.mocktest });
+    });
+    // }
   }
 
   render() {
     const styleCss = {
       table: {
-        padding: "0 50px",
-        boxSizing: "border-box",
-        marginTop: 50
+        // padding: "0 50px",
+        // boxSizing: "border-box",
+        // marginTop: 50
       }
     };
 

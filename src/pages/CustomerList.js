@@ -35,14 +35,14 @@ class CustomerList extends React.Component {
   // 组件挂载后调用一次
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
-    const pathname = this.props.location.pathname;
-    if (pathname === "/customerList") {
-      console.log(1111);
-      axios.get("/customerList").then(res => {
-        console.log("mock返回数据", res);
-        this.setState({ list: res.data.data });
-      });
-    }
+    // const pathname = this.props.location.pathname;
+    // if (pathname === "/customerList") {
+    console.log(1111);
+    axios.get("/customerList").then(res => {
+      console.log("mock返回数据", res);
+      this.setState({ list: res.data.data });
+    });
+    // }
   }
   // 删除一条信息
   delete(item) {
@@ -84,9 +84,9 @@ class CustomerList extends React.Component {
         marginRight: "10px"
       },
       table: {
-        padding: "0 50px",
-        boxSizing: "border-box",
-        marginTop: 50
+        // padding: "0 50px",
+        // boxSizing: "border-box",
+        // marginTop: 50
       },
       mar: {
         marginLeft: "30px"

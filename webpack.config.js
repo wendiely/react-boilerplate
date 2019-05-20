@@ -31,7 +31,24 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader", "postcss-loader"]
+        // use: ["style-loader", "css-loader", "less-loader", "postcss-loader"]
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              modifyVars: {
+                // 更改全局颜色
+                "primary-color": "#E10601",
+                "link-color": "#E10601",
+                "border-radius-base": "20px"
+              },
+              javascriptEnabled: true
+            }
+          },
+          "postcss-loader"
+        ]
       },
       {
         test: /\.css/,

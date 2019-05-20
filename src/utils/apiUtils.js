@@ -50,7 +50,8 @@ const baseAxios = ({
   const options = {
     url: url,
     method: type,
-    baseURL: API_ROOT
+    // baseURL: API_ROOT
+    baseURL: "https://www.easy-mock.com/mock/5ccfdc8d161a426d64acdaf8/example"
   };
 
   if (type === "GET" || type === "DELETE") {

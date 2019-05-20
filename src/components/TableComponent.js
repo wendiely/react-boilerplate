@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Table, Divider, Tag } from "antd";
+import { Table, Divider } from "antd";
 
 class TableComponent extends React.Component {
   constructor(props) {

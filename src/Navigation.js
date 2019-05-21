@@ -50,6 +50,8 @@ class Navigation extends React.Component {
       this.props.history.push({ pathname: "/userList" });
     } else if (key.key === "/shopList") {
       this.props.history.push({ pathname: "/shopList" });
+    } else if (key.key === "/testComponent") {
+      this.props.history.push({ pathname: "/testComponent" });
     }
   }
 
@@ -95,6 +97,7 @@ class Navigation extends React.Component {
             <Menu.Item key="/customerList">客户列表</Menu.Item>
             <Menu.Item key="/userList">用户列表</Menu.Item>
             <Menu.Item key="/shopList">商品列表</Menu.Item>
+            <Menu.Item key="/testComponent">测试组件</Menu.Item>
           </Menu>
         </Header>
       </Layout>

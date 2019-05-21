@@ -11,6 +11,7 @@ import UserDetail from "./pages/UserDetail";
 import ShopList from "./pages/shopList";
 import CustomerList from "./pages/CustomerList";
 import CustomerDetail from "./pages/CustomerDetail";
+import TestComponent from "./pages/TestAd";
 import Navigation from "./Navigation";
 import Login from "./pages/Login";
 import PropTypes from "prop-types";
@@ -194,6 +195,12 @@ class AppRouter extends React.Component {
               exact
             />
             <NavigationRoute path="/userDetail" component={UserDetail} exact />
+            <NavigationRoute
+              path="/testComponent"
+              component={TestComponent}
+              exact
+            />
+
             <Route component={NoMatch} />
           </Switch>
         </div>

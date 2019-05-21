@@ -151,13 +151,9 @@ Mock.mock("/shopList", {
   "mocktest|35-55": [
     {
       "key|+1": 1,
-      name: "@cname", // 中文名称
+      name: "@ctitle", // 中文名称
       "age|18-28": 0, // 18至28以内随机整数, 0只是用来确定类型
-      "address|1": [
-        "New York No. 1 Lake Park",
-        "Sidney No. 1 Lake Park",
-        "London No. 1 Lake Park"
-      ],
+      "address|1": "@city(true)", // 中国城市
       tags: ["nice", "loser"]
     }
   ]

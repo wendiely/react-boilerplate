@@ -98,7 +98,10 @@ class CustomerDetail extends React.Component {
           console.log("新增");
           axios.post("/customerListAdd", values).then(res => {
             console.log("mock返回数据put POST", res);
-            history.go(-1);
+            // history.go(-1);
+            this.props.history.push({
+              pathname: "/customerList"
+            });
           });
         } else {
           console.log("编辑");
@@ -106,7 +109,10 @@ class CustomerDetail extends React.Component {
           axios.put("/customerList", values).then(res => {
             console.log("dfs", this.props);
             console.log("mock返回数据put Put", res);
-            history.go(-1);
+            // history.go(-1);
+            this.props.history.push({
+              pathname: "/customerList"
+            });
           });
         }
       }

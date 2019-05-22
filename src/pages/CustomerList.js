@@ -141,7 +141,7 @@ class CustomerList extends React.Component {
               size="default"
               onClick={() => {
                 this.props.history.push({
-                  pathname: "/CustomerDetail",
+                  pathname: "/customerList/customerDetail",
                   state: { detail: record }
                 });
               }}
@@ -177,7 +177,9 @@ class CustomerList extends React.Component {
             type="primary"
             size="default"
             onClick={() => {
-              this.props.history.push({ pathname: "/CustomerDetail" });
+              this.props.history.push({
+                pathname: "/customerList/customerDetail"
+              });
             }}
           >
             新建

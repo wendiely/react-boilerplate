@@ -1,15 +1,5 @@
 import React from "react";
 
-// class Tree extends react.Component{
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-
-//         }
-//     }
-// }
-// export default Tree
-
 import { Tree, Input } from "antd";
 
 const { TreeNode } = Tree;

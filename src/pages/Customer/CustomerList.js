@@ -19,9 +19,9 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Button, Table, Divider, Popconfirm, message } from "antd";
-import Form from "../components/Form";
+import Form from "../../components/Form";
 
-import "../mock";
+import "../../mock";
 
 class CustomerList extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class CustomerList extends React.Component {
   cancel() {
     message.error("取消删除");
   }
-  // 搜索，共父子组件调用
+  // 搜索，供父子组件调用
   search = item => {
     console.log("搜索搜索搜索搜索", item);
     // const id = item.id;
@@ -141,7 +141,7 @@ class CustomerList extends React.Component {
               size="default"
               onClick={() => {
                 this.props.history.push({
-                  pathname: "/customerList/customerDetail",
+                  pathname: "/customerList/customerDetail/" + record.id,
                   state: { detail: record }
                 });
               }}
@@ -178,7 +178,7 @@ class CustomerList extends React.Component {
             size="default"
             onClick={() => {
               this.props.history.push({
-                pathname: "/customerList/customerDetail"
+                pathname: "/customerList/customerDetail/0"
               });
             }}
           >

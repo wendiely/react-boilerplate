@@ -6,23 +6,27 @@ import {
   Redirect,
   Link
 } from "react-router-dom";
-import UserList from "./pages/UserList";
-import UserDetail from "./pages/UserDetail";
-import ShopList from "./pages/shopList";
-import CustomerList from "./pages/CustomerList";
-import CustomerDetail from "./pages/CustomerDetail";
-import TestComponent from "./pages/TestAd";
-import MobileComponent from "./pages/mobileList";
-import StepsZou from "./pages/StepsZou";
+import UserList from "./pages/User/UserList";
+import UserDetail from "./pages/User/UserDetail";
+import ShopList from "./pages/shop/shopList";
+import CustomerList from "./pages/Customer/CustomerList";
+import CustomerDetail from "./pages/Customer/CustomerDetail";
+import TestComponent from "./pages/ComponentShow/TestAd";
+import MobileComponent from "./pages/ComponentShow/mobileList";
+import Editor from "./pages/ComponentShow/Editor";
+
+import StepsZou from "./pages/ComponentShow/StepsZou";
+import BizCharts from "./pages/DataAnalysis/BizCharts";
 import Navigation from "./Navigation";
 import SecondMenu from "./SecondMenu";
+import QuickNav from "./components/QuickNav";
 import Login from "./pages/Login";
 import PropTypes from "prop-types";
 
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Layout } from "antd";
 
-const { SubMenu } = Menu;
-const { Header, Footer, Sider, Content } = Layout;
+// const { SubMenu } = Menu;
+const { Header, Footer, Content } = Layout;
 
 const NoMatch = props => {
   return (
@@ -88,12 +92,6 @@ const NavigationRoute = ({ component: Component, ...rest }) => {
                   <Navigation {...props} />
                 </Header>
                 <Content style={{ padding: "0 50px" }}>
-                  <Breadcrumb style={{ margin: "16px 0" }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                  </Breadcrumb>
-
                   <Layout
                     style={{
                       padding: "24px 0",
@@ -103,8 +101,8 @@ const NavigationRoute = ({ component: Component, ...rest }) => {
                     }}
                   >
                     <SecondMenu {...props} />
-
                     <Content style={{ padding: "0 24px", minHeight: 280 }}>
+                      {/* <QuickNav {...props} /> */}
                       <Component {...props} />
                     </Content>
                   </Layout>
@@ -156,7 +154,7 @@ class AppRouter extends React.Component {
               exact
             />
             <NavigationRoute
-              path="/customerList/customerDetail"
+              path={`/customerList/customerDetail/:id`}
               component={CustomerDetail}
               exact
             />
@@ -171,6 +169,8 @@ class AppRouter extends React.Component {
               component={MobileComponent}
               exact
             />
+            <NavigationRoute path="/Editor" component={Editor} exact />
+            <NavigationRoute path="/BizCharts" component={BizCharts} exact />
             <NavigationRoute path="/StepsZou" component={StepsZou} exact />
 
             <Route component={NoMatch} />

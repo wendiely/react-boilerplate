@@ -49,6 +49,18 @@ class DemoApi {
       return res;
     });
   };
+
+  BizChart = e => {
+    const params = {
+      url: `/Bizchart`,
+      type: "GET",
+      data: e
+    };
+    console.log(333333333333333, e, params);
+    return baseAxios(params).then(res => {
+      return res;
+    });
+  };
 }
 
 export default new DemoApi();

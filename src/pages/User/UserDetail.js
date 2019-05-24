@@ -12,7 +12,7 @@ import {
 } from "antd";
 import axios from "axios";
 import moment from "moment"; // antd日期选择器的日期格式
-import UserDetailFrom from "../components/UserDetailForm";
+import UserDetailFrom from "../../components/UserDetailForm";
 
 // const { Option } = Select;
 // const AutoCompleteOption = AutoComplete.Option;

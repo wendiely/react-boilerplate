@@ -1,8 +1,8 @@
 import React from "react";
-import TagBox from "../components/tags";
-import TimeLine from "../components/TimeLine";
-import Tree from "../components/Tree";
-import UploadPhoto from "../components/UploadPhoto";
+import TagBox from "../../components/tags";
+import TimeLine from "../../components/TimeLine";
+import Tree from "../../components/Tree";
+import UploadPhoto from "../../components/UploadPhoto";
 import { Card } from "antd";
 
 // eslint-disable-next-line react/prefer-stateless-function

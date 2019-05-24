@@ -11,22 +11,40 @@ class SecondMenu extends React.Component {
     super(props);
     (this.state = {
       list: [],
-      name: ""
+      name: "",
+      openKeys: [],
+      // 显示的一级菜单
+      rootSubmenuKeys: ["sub1", "sub2", "sub4"]
     }),
       console.log(666, props);
     this.handleClick = this.handleClick.bind(this); // 改变this的指向
   }
   componentDidMount() {
     console.log("我是二级导航的加载", this.props);
-    // this.setState({ name: JSON.parse(localStorage.getItem("denglu"))[0].name });
+    const pathname = this.props.location.pathname.replace("/", "");
+    this.setState({ openKeys: [pathname] });
+    this.onOpenChange([pathname]);
   }
 
   // let TabPane = Tabs.TabPane;
   handleClick(key) {
-    //   console.log(2, key);
     console.log(2, key, this);
     if (key.key === "/mobileComponent") {
       this.props.history.push({ pathname: "/mobileComponent" });
+    } else if (key.key === "/customerList") {
+      this.props.history.push({ pathname: "/customerList" });
+    } else if (key.key === "/userList") {
+      this.props.history.push({ pathname: "/userList" });
+    } else if (key.key === "/shopList") {
+      this.props.history.push({ pathname: "/shopList" });
+    } else if (key.key === "/testComponent") {
+      this.props.history.push({ pathname: "/testComponent" });
+    } else if (key.key === "/StepsZou") {
+      this.props.history.push({ pathname: "/StepsZou" });
+    } else if (key.key === "/Editor") {
+      this.props.history.push({ pathname: "/Editor" });
+    } else if (key.key === "/BizCharts") {
+      this.props.history.push({ pathname: "/BizCharts" });
     }
     // else if (key.key === "/userList") {
     //     this.props.history.push({ pathname: "/userList" });
@@ -37,16 +55,35 @@ class SecondMenu extends React.Component {
     //   }
   }
 
+  onOpenChange = openKeys => {
+    console.log("hhhhhhhhhhhhhhhhhhhh哈啊啊啊啊啊啊啊啊啊");
+    console.log(this.state.openKeys, openKeys);
+    const latestOpenKey = openKeys.find(
+      key => this.state.openKeys.indexOf(key) === -1
+    );
+    console.log(latestOpenKey);
+    if (this.state.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys });
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : []
+      });
+    }
+  };
+
   render() {
-    console.log("");
+    console.log(this.state.openKeys);
 
     return (
       <Sider width={200} style={{ background: "#fff" }}>
         <Menu
           mode="inline"
+          selectedKeys={[this.props.location.pathname]}
+          openKeys={this.state.openKeys}
+          onOpenChange={this.onOpenChange}
           onClick={this.handleClick}
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          // defaultOpenKeys={['sub1']}
+          // defaultSelectedKeys={[this.props.location.pathname]}
           style={{ height: "100%" }}
         >
           <SubMenu
@@ -59,9 +96,20 @@ class SecondMenu extends React.Component {
             }
           >
             <Menu.Item key="/mobileComponent">手机显示部分</Menu.Item>
-            <Menu.Item key="2">富文本的编辑与显示</Menu.Item>
-            <Menu.Item key="3">option3</Menu.Item>
-            <Menu.Item key="4">option4</Menu.Item>
+            <Menu.Item key="/Editor">富文本的编辑与显示</Menu.Item>
+            <Menu.Item key="/testComponent">测试组件</Menu.Item>
+            <Menu.Item key="/StepsZou">支付步骤</Menu.Item>
+          </SubMenu>
+          <SubMenu
+            key="user"
+            title={
+              <span>
+                <Icon type="laptop" />
+                使用者
+              </span>
+            }
+          >
+            <Menu.Item key="/userList">Users</Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub2"
@@ -72,24 +120,31 @@ class SecondMenu extends React.Component {
               </span>
             }
           >
-            <Menu.Item key="5">数据可视化分析</Menu.Item>
-            <Menu.Item key="6">option6</Menu.Item>
-            <Menu.Item key="7">option7</Menu.Item>
-            <Menu.Item key="8">option8</Menu.Item>
+            <Menu.Item key="/BizCharts">数据可视化分析</Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub3"
+            defaultSelectedKeys={["/customerList"]}
             title={
               <span>
                 <Icon type="notification" />
-                subnav 3
+                客户
               </span>
             }
           >
-            <Menu.Item key="9">option9</Menu.Item>
-            <Menu.Item key="10">option10</Menu.Item>
-            <Menu.Item key="11">option11</Menu.Item>
-            <Menu.Item key="12">option12</Menu.Item>
+            <Menu.Item key="/customerList">客户列表</Menu.Item>
+          </SubMenu>
+          <SubMenu
+            key="sub4"
+            defaultSelectedKeys={["/shopList"]}
+            title={
+              <span>
+                <Icon type="notification" />
+                商品
+              </span>
+            }
+          >
+            <Menu.Item key="/shopList">商品列表</Menu.Item>
           </SubMenu>
         </Menu>
       </Sider>

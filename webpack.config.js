@@ -10,7 +10,9 @@ const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin");
 const publicPath = "/" + version + "/";
 
 module.exports = {
+  // webpack 打包入口
   entry: "./src/index.js",
+  // webpack 打包出口（可以有多个）
   output: {
     filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "./dist/" + version),
@@ -22,7 +24,9 @@ module.exports = {
       "@": path.resolve(__dirname, "./src")
     }
   },
+  // 在webpack中定义loader，是在 module.rules中
   module: {
+    // 对module对象定义了一些规则
     rules: [
       {
         test: /\.js?$/,
@@ -79,6 +83,7 @@ module.exports = {
   optimization: {
     minimizer: [new UglifyJsPlugin()]
   },
+  // 插件
   plugins: [
     // 打包前先清空
     new CleanWebpackPlugin(["dist"], {

@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "../components/TableComponent";
+import Table from "../../components/TableComponent";
 // import Axios from "axios";
 import DemoApi from "@/api";
 import PropTypes from "prop-types";

@@ -33,27 +33,27 @@ class Navigation extends React.Component {
       name: ""
     }),
       console.log(666, props);
-    this.callback = this.callback.bind(this); // 改变this的指向
+    // this.callback = this.callback.bind(this); // 改变this的指向
   }
   componentDidMount() {
     console.log("11开始导航navigation mounted......", this.props);
     this.setState({ name: JSON.parse(localStorage.getItem("denglu"))[0].name });
   }
 
-  // let TabPane = Tabs.TabPane;
-  callback(key) {
-    console.log(2, key);
-    console.log(2, key, this);
-    if (key.key === "/customerList") {
-      this.props.history.push({ pathname: "/customerList" });
-    } else if (key.key === "/userList") {
-      this.props.history.push({ pathname: "/userList" });
-    } else if (key.key === "/shopList") {
-      this.props.history.push({ pathname: "/shopList" });
-    } else if (key.key === "/testComponent") {
-      this.props.history.push({ pathname: "/testComponent" });
-    }
-  }
+  // // let TabPane = Tabs.TabPane;
+  // callback(key) {
+  //   console.log(2, key);
+  //   console.log(2, key, this);
+  //   if (key.key === "/customerList") {
+  //     this.props.history.push({ pathname: "/customerList" });
+  //   } else if (key.key === "/userList") {
+  //     this.props.history.push({ pathname: "/userList" });
+  //   } else if (key.key === "/shopList") {
+  //     this.props.history.push({ pathname: "/shopList" });
+  //   } else if (key.key === "/testComponent") {
+  //     this.props.history.push({ pathname: "/testComponent" });
+  //   }
+  // }
 
   render() {
     console.log("加载导航部分navigationProps:");
@@ -87,7 +87,7 @@ class Navigation extends React.Component {
               log out
             </Button>
           </div>
-          <Menu
+          {/* <Menu
             theme="dark"
             onClick={this.callback}
             mode="horizontal"
@@ -98,7 +98,7 @@ class Navigation extends React.Component {
             <Menu.Item key="/userList">用户列表</Menu.Item>
             <Menu.Item key="/shopList">商品列表</Menu.Item>
             <Menu.Item key="/testComponent">测试组件</Menu.Item>
-          </Menu>
+          </Menu> */}
         </Header>
       </Layout>
       // <div>

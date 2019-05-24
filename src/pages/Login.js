@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, Button, Icon, Input, message } from "antd";
 import PropTypes from "prop-types";
-import DemoApi from "@/api";
+// import DemoApi from "./User/node_modules/@/api";
+import DemoApi from "../api/index";
 
 class Login extends React.Component {
   constructor(props) {

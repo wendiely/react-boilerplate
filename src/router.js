@@ -20,6 +20,7 @@ import BizCharts from "./pages/DataAnalysis/BizCharts";
 import Navigation from "./Navigation";
 import SecondMenu from "./SecondMenu";
 import QuickNav from "./components/QuickNav";
+import Notice from "./pages/NoticeUpperLevel/Notice";
 import Login from "./pages/Login";
 import PropTypes from "prop-types";
 
@@ -148,6 +149,7 @@ class AppRouter extends React.Component {
             <Route component={Login} path="/login" exact />
             <NavigationRoute path="/shopList" component={ShopList} exact />
             <NavigationRoute path="/userList" component={UserList} exact />
+            <NavigationRoute path="/Notice" component={Notice} exact />
             <NavigationRoute
               path="/customerList"
               component={CustomerList}

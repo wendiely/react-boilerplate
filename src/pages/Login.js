@@ -34,7 +34,8 @@ class Login extends React.Component {
       localStorage.setItem("denglu", JSON.stringify(this.state.userAgoList));
 
       localStorage.setItem("isLogin", "1");
-      this.props.history.push("/userList"); // 跳转到  /userList路由界面
+      // this.props.history.push("/userList"); // 跳转到  /userList路由界面
+      this.props.history.push("/Notice"); // 跳转到  /Notice
     }
   };
   nameChange = e => {

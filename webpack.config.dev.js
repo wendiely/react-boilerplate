@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
+  // 这里设置 文件打包环境 的配置
   mode: "development",
   entry: "./src/index.js",
   output: {

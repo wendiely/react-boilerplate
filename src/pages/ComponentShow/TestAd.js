@@ -41,7 +41,7 @@ class TestAd extends React.Component {
         </Card.Grid>
         <Card.Grid style={gridBigStyle}>
           <h1>一面照片墙</h1>
-          <UploadPhoto />
+          {/* <UploadPhoto /> */}
         </Card.Grid>
       </Card>
     );

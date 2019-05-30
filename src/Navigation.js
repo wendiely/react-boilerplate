@@ -1,7 +1,8 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Layout, Menu, Button } from "antd";
+import { Layout, Menu, Button, Input, message } from "antd";
+const Search = Input.Search;
 
 // const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -73,6 +74,18 @@ class Navigation extends React.Component {
           >
             聚奢网
           </div>
+          <div className="logo" style={{ color: "#fff", float: "left" }}>
+            <Search
+              style={{ marginLeft: 20, width: 300 }}
+              placeholder="搜索聚奢网内部电风扇"
+              // enterButton="Search"
+              // size="large"
+              onSearch={value => {
+                message.success("搜索" + value);
+              }}
+            />
+          </div>
+
           <div className="logo" style={{ color: "#fff", float: "right" }}>
             <span style={{ margin: "0 10px 0 0" }}>{this.state.name}</span>
             <Button

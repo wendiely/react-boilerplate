@@ -2,6 +2,7 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Layout, Menu, Icon } from "antd";
+// import { threadId } from "worker_threads";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -45,6 +46,8 @@ class SecondMenu extends React.Component {
       this.props.history.push({ pathname: "/Editor" });
     } else if (key.key === "/BizCharts") {
       this.props.history.push({ pathname: "/BizCharts" });
+    } else if (key.key === "/Notice") {
+      this.props.history.push({ pathname: "/Notice" });
     }
     // else if (key.key === "/userList") {
     //     this.props.history.push({ pathname: "/userList" });
@@ -86,6 +89,7 @@ class SecondMenu extends React.Component {
           // defaultSelectedKeys={[this.props.location.pathname]}
           style={{ height: "100%" }}
         >
+          <Menu.Item key="/Notice">首页</Menu.Item>
           <SubMenu
             key="sub1"
             title={

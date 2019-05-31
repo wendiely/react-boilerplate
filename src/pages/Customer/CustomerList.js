@@ -17,9 +17,12 @@
 
 import React from "react";
 import axios from "axios";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { Button, Table, Divider, Popconfirm, message } from "antd";
 import Form from "../../components/Form";
+
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import "../../mock";
 
@@ -27,7 +30,8 @@ class CustomerList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
+      ref: "table" // 从父组件获取参数判断该table是否需要导出
     };
 
     this.search = this.search.bind(this);
@@ -42,6 +46,13 @@ class CustomerList extends React.Component {
       console.log("mock返回数据", res);
       this.setState({ list: res.data.data });
     });
+    // }
+
+    // if (this.state.ref === 'table') {
+    const tableCon = ReactDOM.findDOMNode(this.refs["table"]); // 通过ref属性找到该table,后返回党庆显示数组中的数据
+    console.log("哈哈哈哈哈哈哈哈哈哈", tableCon, this.refs["table"]);
+    const table = tableCon.querySelector("table"); //获取table
+    table.setAttribute("id", "table-to-xls"); //给该table设置属性
     // }
   }
   // 重置
@@ -193,7 +204,21 @@ class CustomerList extends React.Component {
           </Button>
         </h2>
         <Form comment={sql} Reset={this.Reset} search={this.search} />
-        <Table columns={columns} dataSource={this.state.list} />
+
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="download-table-xls-button"
+          table="table-to-xls"
+          filename="tablexls"
+          sheet="tablexls"
+          buttonText="Download as XLS"
+        />
+
+        <Table
+          columns={columns}
+          dataSource={this.state.list}
+          ref={this.state.ref}
+        />
       </div>
     );
   }

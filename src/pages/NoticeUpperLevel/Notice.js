@@ -79,6 +79,7 @@ class Notice extends React.Component {
             total={this.state.total}
             onChange={this.onChange}
             list={this.state.list}
+            status={this.state.status}
             content="公告"
           />
         </Panel>

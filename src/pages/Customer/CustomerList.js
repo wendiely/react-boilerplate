@@ -44,6 +44,13 @@ class CustomerList extends React.Component {
     });
     // }
   }
+  // 重置
+  Reset = item => {
+    axios.get("/customerList").then(res => {
+      console.log("mock返回数据", res);
+      this.setState({ list: res.data.data });
+    });
+  };
   // 删除一条信息
   delete(item) {
     console.log("东搜", item);
@@ -185,7 +192,7 @@ class CustomerList extends React.Component {
             新建
           </Button>
         </h2>
-        <Form comment={sql} search={this.search} />
+        <Form comment={sql} Reset={this.Reset} search={this.search} />
         <Table columns={columns} dataSource={this.state.list} />
       </div>
     );

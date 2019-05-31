@@ -61,6 +61,18 @@ class DemoApi {
       return res;
     });
   };
+  // 首页通知信息
+  Notice = e => {
+    const params = {
+      url: `/noticeLIst`,
+      type: "GET",
+      data: e
+    };
+    console.log("首页通知信息", e, params);
+    return baseAxios(params).then(res => {
+      return res;
+    });
+  };
 }
 
 export default new DemoApi();

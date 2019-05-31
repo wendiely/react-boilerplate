@@ -40,6 +40,7 @@ const list = function(options) {
   switch (rtype) {
     case "get":
       console.log(rtype);
+      arr = arrOBject.data;
       break;
     // eslint-disable-next-line no-case-declarations
     case "put":

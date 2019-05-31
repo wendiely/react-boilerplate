@@ -1,13 +1,8 @@
 import React from "react";
-import { Collapse, Icon, Tag } from "antd";
+import { Collapse, Icon, Tag, Pagination, Avatar } from "antd";
 import PropTypes from "prop-types";
 const Panel = Collapse.Panel;
 
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
 const genExtra = () => (
   <Icon
     type="setting"
@@ -41,7 +36,7 @@ class CollapseCom extends React.Component {
           )}
         >
           <Panel header="新员工" key="1" style={customPanelStyle}>
-            {this.props.data.map(e => {
+            {this.props.data.new.map(e => {
               return (
                 <Tag key={e} color="green">
                   {e}
@@ -50,7 +45,7 @@ class CollapseCom extends React.Component {
             })}
           </Panel>
           <Panel header="今日迟到" key="2" style={customPanelStyle}>
-            {this.props.data.map(e => {
+            {this.props.data.cd.map(e => {
               return (
                 <Tag key={e} color="red">
                   {e}
@@ -62,36 +57,42 @@ class CollapseCom extends React.Component {
       );
     } else if (this.props.content === "公告") {
       return (
-        <Collapse
-          accordion
-          bordered={false}
-          expandIcon={({ isActive }) => (
-            <Icon type="caret-right" rotate={isActive ? 90 : 0} />
-          )}
-        >
-          <Panel
-            header="This is panel header 2"
-            key="1"
-            style={customPanelStyle}
-            extra={genExtra()}
+        <div>
+          <Collapse
+            accordion
+            bordered={false}
+            expandIcon={({ isActive }) => (
+              <Icon type="caret-right" rotate={isActive ? 90 : 0} />
+            )}
           >
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="This is panel header 2"
-            key="2"
-            style={customPanelStyle}
-          >
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="This is panel header 3"
-            key="3"
-            style={customPanelStyle}
-          >
-            <p>{text}</p>
-          </Panel>
-        </Collapse>
+            {this.props.list.map(e => {
+              return (
+                <Panel
+                  header={e.title}
+                  key={e.id}
+                  style={customPanelStyle}
+                  extra={genExtra()}
+                >
+                  <p>{e.content}</p>
+                  <p>
+                    发布人： <Avatar src={e.urlImg} />
+                  </p>
+                  <a href={e.url} target="_top" rel="help">
+                    查看详情
+                  </a>
+                </Panel>
+              );
+            })}
+          </Collapse>
+          <Pagination
+            // pageSizeOptions= {['5', '10', '15', '20', '30', '50']}
+            showSizeChanger
+            onShowSizeChange={this.props.onChange}
+            onChange={this.props.onChange}
+            defaultCurrent={1}
+            total={this.props.total}
+          />
+        </div>
       );
     }
   }
@@ -99,7 +100,11 @@ class CollapseCom extends React.Component {
 
 CollapseCom.propTypes = {
   content: PropTypes.string,
-  data: PropTypes.array
+  data: PropTypes.object,
+  list: PropTypes.array,
+  onChange: PropTypes.func,
+  // EachPage: PropTypes.func,
+  total: PropTypes.number
 };
 
 export default CollapseCom;

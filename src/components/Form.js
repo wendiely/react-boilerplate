@@ -1,5 +1,5 @@
 import { Form, Row, Col, Input, Button, message } from "antd";
-
+import PropTypes from "prop-types";
 import React from "react";
 //   import ReactDOM from "react-dom"
 class AdvancedSearchForm extends React.Component {
@@ -66,6 +66,7 @@ class AdvancedSearchForm extends React.Component {
     // eslint-disable-next-line react/prop-types
     this.props.form.resetFields();
     message.success("我重置啦！");
+    this.props.Reset();
   };
 
   // toggle = () => {
@@ -86,7 +87,7 @@ class AdvancedSearchForm extends React.Component {
       <Form
         style={table.border}
         layout="inline"
-        className="ant-advanced-search-form"
+        className="advanced_search"
         onSubmit={this.handleSearch}
       >
         <Form.Item label="姓名">
@@ -139,6 +140,12 @@ class AdvancedSearchForm extends React.Component {
 const WrappedAdvancedSearchForm = Form.create({ name: "advanced_search" })(
   AdvancedSearchForm
 );
+
+WrappedAdvancedSearchForm.propTypes = {
+  search: PropTypes.func,
+  Reset: PropTypes.func
+};
+
 //   ReactDOM.render(
 //     <div>
 //       <WrappedAdvancedSearchForm />

@@ -186,6 +186,11 @@ class CustomerList extends React.Component {
       name: "",
       phone: ""
     };
+    const ac = {
+      bb: {
+        background: "blue"
+      }
+    };
     return (
       <div style={styleCss.table}>
         <h2>
@@ -206,6 +211,7 @@ class CustomerList extends React.Component {
         <Form comment={sql} Reset={this.Reset} search={this.search} />
 
         <ReactHTMLTableToExcel
+          style={ac.bb}
           id="test-table-xls-button"
           className="download-table-xls-button"
           table="table-to-xls"

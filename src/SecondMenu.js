@@ -48,6 +48,10 @@ class SecondMenu extends React.Component {
       this.props.history.push({ pathname: "/BizCharts" });
     } else if (key.key === "/Notice") {
       this.props.history.push({ pathname: "/Notice" });
+    } else if (key.key === "/WaterFall") {
+      this.props.history.push({ pathname: "/WaterFall" });
+    } else if (key.key === "/imageLazy") {
+      this.props.history.push({ pathname: "/imageLazy" });
     }
     // else if (key.key === "/userList") {
     //     this.props.history.push({ pathname: "/userList" });
@@ -102,7 +106,9 @@ class SecondMenu extends React.Component {
             <Menu.Item key="/mobileComponent">手机显示部分</Menu.Item>
             <Menu.Item key="/Editor">富文本的编辑与显示</Menu.Item>
             <Menu.Item key="/testComponent">测试组件</Menu.Item>
-            <Menu.Item key="/StepsZou">支付步骤</Menu.Item>
+            <Menu.Item key="/StepsZou">编辑步骤</Menu.Item>
+            <Menu.Item key="/WaterFall">瀑布流</Menu.Item>
+            <Menu.Item key="/imageLazy">图片懒加载</Menu.Item>
           </SubMenu>
           <SubMenu
             key="user"

@@ -236,6 +236,7 @@ class ShopList extends React.Component {
     const pathname = this.props.location.pathname;
     if (pathname === "/shopList") {
       console.log(1111);
+      // 向后台请求数据
       axios.get("/shopList").then(res => {
         console.log("mock返回数据", res.data.mocktest);
         this.setState({ list: res.data.mocktest });
@@ -276,6 +277,18 @@ class ShopList extends React.Component {
   };
   onChange = e => {
     console.log("地点选择框", e);
+  };
+  buttonOn = e => {
+    axios
+      .get("/shopList")
+      .then(res => res.blob())
+      .then(blob => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "filename.xlsx";
+        a.click();
+      });
   };
 
   render() {
@@ -350,6 +363,9 @@ class ShopList extends React.Component {
     return (
       <div style={styleCss.table}>
         <h2>商品列表 </h2>
+        <h3>
+          <button onClick={this.buttonOn}> 下载啊</button>
+        </h3>
         <Table columns={columns} dataSource={this.state.list} />
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}

@@ -19,7 +19,9 @@ import StepsZou from "./pages/ComponentShow/StepsZou";
 import BizCharts from "./pages/DataAnalysis/BizCharts";
 import Navigation from "./Navigation";
 import SecondMenu from "./SecondMenu";
-import QuickNav from "./components/QuickNav";
+// import QuickNav from "./components/QuickNav";
+import imageLazy from "./pages/ComponentShow/ImageLazy";
+import WaterFall from "./pages/ComponentShow/WaterFall";
 import Notice from "./pages/NoticeUpperLevel/Notice";
 import Login from "./pages/Login";
 import PropTypes from "prop-types";
@@ -174,6 +176,8 @@ class AppRouter extends React.Component {
             <NavigationRoute path="/Editor" component={Editor} exact />
             <NavigationRoute path="/BizCharts" component={BizCharts} exact />
             <NavigationRoute path="/StepsZou" component={StepsZou} exact />
+            <NavigationRoute path="/WaterFall" component={WaterFall} exact />
+            <NavigationRoute path="/imageLazy" component={imageLazy} exact />
 
             <Route component={NoMatch} />
           </Switch>

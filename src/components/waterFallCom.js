@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import ImageLayout from "react-image-layout";
+// import ImageLayout from "react-image-layout";
 
 // import Masonry from 'masonry-layout';
 // import cx from 'classnames';
@@ -49,7 +49,7 @@ class WaterFallCom extends React.Component {
     return (
       <div>
         {/* <ImageLayout items={items} columnWidth={200} columns={5} gutter={8} /> */}
-        <ImageLayout items={aa} />
+        {/* <ImageLayout items={aa} /> */}
       </div>
     );
   }

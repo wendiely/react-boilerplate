@@ -12,48 +12,50 @@ import {
 } from "antd";
 import axios from "axios";
 import moment from "moment"; // antd日期选择器的日期格式
+// 引入级联选择器的选择区间
+import residences from "../../utils/region";
 
 // const { Option } = Select;
 // const AutoCompleteOption = AutoComplete.Option;
 // 自定义级联选择器的选择范围（城市选择）
-const residences = [
-  {
-    value: "浙江",
-    label: "浙江",
-    children: [
-      {
-        value: "杭州",
-        label: "杭州"
-      }
-    ]
-  },
-  {
-    value: "江苏",
-    label: "江苏",
-    children: [
-      {
-        value: "南京",
-        label: "南京",
-        children: [
-          {
-            value: "秦淮",
-            label: "秦淮"
-          }
-        ]
-      },
-      {
-        value: "无锡",
-        label: "无锡",
-        children: [
-          {
-            value: "锡山",
-            label: "锡山"
-          }
-        ]
-      }
-    ]
-  }
-];
+// const residences = [
+//   {
+//     value: "浙江",
+//     label: "浙江",
+//     children: [
+//       {
+//         value: "杭州",
+//         label: "杭州"
+//       }
+//     ]
+//   },
+//   {
+//     value: "江苏",
+//     label: "江苏",
+//     children: [
+//       {
+//         value: "南京",
+//         label: "南京",
+//         children: [
+//           {
+//             value: "秦淮",
+//             label: "秦淮"
+//           }
+//         ]
+//       },
+//       {
+//         value: "无锡",
+//         label: "无锡",
+//         children: [
+//           {
+//             value: "锡山",
+//             label: "锡山"
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ];
 
 class CustomerDetail extends React.Component {
   constructor(props) {
@@ -76,8 +78,25 @@ class CustomerDetail extends React.Component {
       // this.setState({ detail: {} });
     } else {
       console.log("2222222详情页加载吗？", this.props);
-      this.setState({ detail: this.props.location.state.detail });
+      const detail = this.props.location.state.detail;
+      // 更改城市city的数据格式   XX 没有必要，级联选择器可以显示数组里的内容，不许更换形式
+      // const city = [
+      //   {
+      //     value: detail.city[0],
+      //     label: detail.city[0],
+      //     children: [
+      //       {
+      //         value: detail.city[1],
+      //         label: detail.city[1]
+      //       }
+      //     ]
+      //   }
+      // ]
+      // detail.city = city
+      this.setState({ detail: detail });
       console.log(this.state.detail, this.props.location.state.detail);
+
+      console.log(this.props.location.state.detail.city);
     }
   }
 
@@ -264,7 +283,10 @@ class CustomerDetail extends React.Component {
               this.props.location.state !== undefined
                 ? this.props.location.state.detail.city
                 : ["浙江", "杭州"],
-            // initialValue: this.props.location.state !== undefined ? this.props.location.state.detail.city : ['浙江', '杭州'],
+            initialValue:
+              this.props.location.state !== undefined
+                ? this.props.location.state.detail.city
+                : ["浙江", "杭州"],
             rules: [
               { type: "array", required: true, message: "请填写居住城市" }
             ]
